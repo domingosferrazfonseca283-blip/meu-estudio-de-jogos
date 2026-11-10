@@ -34,8 +34,10 @@ function kamba_sanitize_identity( $input ) {
 	$input = is_array( $input ) ? $input : array();
 	$primary = isset( $input['primary_color'] ) ? sanitize_hex_color( $input['primary_color'] ) : '';
 	$dark = isset( $input['dark_color'] ) ? sanitize_hex_color( $input['dark_color'] ) : '';
+	$platform_name = isset( $input['platform_name'] ) ? sanitize_text_field( $input['platform_name'] ) : $defaults['platform_name'];
+	if ( '' === $platform_name ) { $platform_name = $defaults['platform_name']; }
 	return array(
-		'platform_name' => isset( $input['platform_name'] ) ? sanitize_text_field( $input['platform_name'] ) : $defaults['platform_name'],
+		'platform_name' => $platform_name,
 		'logo_url'      => isset( $input['logo_url'] ) ? esc_url_raw( $input['logo_url'] ) : '',
 		'primary_color' => $primary ? $primary : $defaults['primary_color'],
 		'dark_color'    => $dark ? $dark : $defaults['dark_color'],
